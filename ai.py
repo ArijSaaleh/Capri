@@ -9,7 +9,6 @@ class AI():
         self.engine = pyttsx3.init()
         self.r = sr.Recognizer()
         self.m = sr.Microphone()
-        
         if name is not None:
             self.__name= name
         
@@ -37,14 +36,15 @@ class AI():
             audio = self.r.listen(source)
         print("got it")
     
-    try:
-        phrase = self.r.recognize_google(audio, show_all=False, language="en-us")
-        sentence ="ok got it you said"+phrase
-        self.engine.say(sentence)
-        self.engine.runAndWait()
-    except e as error:
-        print("Sorry, didn't catch that", e)
-        self.engine.say("sorry didn't catch that")
-        self.engine.runAndWait()
-    print("You said", phrase)
+        try:
+            phrase = self.r.recognize_google(audio, show_all=False, language="en_US")
+            sentence ="ok got it you said"+phrase
+            self.engine.say(sentence)
+            self.engine.runAndWait()
+        except e as error:
+            print("Sorry, didn't catch that", e)
+            self.engine.say("sorry didn't catch that")
+            self.engine.runAndWait()
+        print("You said", phrase)
+        return phrase
     
